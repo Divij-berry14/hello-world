@@ -1,0 +1,160 @@
+package com.example.sambbhavgarg.myapplication;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.util.LogPrinter;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import static android.R.attr.tag;
+public class MainActivity extends AppCompatActivity {
+    ListView lstView;
+    TextView textView1,textView2;
+    Button button;
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        textView1 = (TextView) findViewById(R.id.txtView1);
+        textView1.setText("Application");
+        textView2 = (TextView) findViewById(R.id.txtView2);
+        textView2.setText("Application 2");
+        button = (Button) findViewById(R.id.button);
+        button.setOnClickListener
+                (new View.OnClickListener()
+                                  {
+                                      @Override
+                                      public void onClick(View v)
+                                      {
+                                          Toast.makeText(MainActivity.this, "finally, guess who got clicked", Toast.LENGTH_LONG).show();
+                                          button.setText("U Clicked Me");
+                                          Intent intent = new Intent(getApplicationContext(),SecondActivity.class);
+                                          startActivity(intent);
+                                      }
+                                  }
+                );
+        lstView=(ListView)findViewById(R.id.lstView);
+        String [] names={"CCVT","CSF","BAO","UPES","CCVT", "CSF","BAO","UPES","CCVT", "CSF","BAO","UPES","CCVT", "CSF","BAO","UPES","CCVT", "CSF","BAO","UPES","CCVT", "CSF","BAO","UPES","CCVT", "CSF","BAO","UPES","CCVT", "CSF","BAO","UPES","CCVT", "CSF","BAO","UPES","CCVT", "CSF","BAO","UPES"};
+        ArrayAdapter<String>arrayAdapter= new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1,names);
+        lstView.setAdapter(arrayAdapter);
+
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        Log.d("onStart","onStart is called");
+    }
+    @Override
+    protected void onResume() {
+         super.onResume();
+        Log.d("onResume" ,"onResume is called");
+    }
+    @Override
+     protected void onPause() {
+    super.onPause();
+    Log.d("onPause","onPause is called");
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("onStop","onStop is called");
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("onDestroy","onDestroy is called");
+    }
+}
+
+//act2
+package com.example.sambbhavgarg.myapplication;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class SecondActivity extends AppCompatActivity {
+    TextView textView,textView1;
+    EditText putPass;
+    Button button;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_second);
+        textView =(TextView)findViewById(R.id.txtViewA2);
+        putPass=(EditText)findViewById(R.id.putPass);
+        textView.setText("Activity Two is here, to watch me you need eyes.");
+        button=(Button)findViewById(R.id.btton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SecondActivity.this, "Thank You", Toast.LENGTH_SHORT).show();
+                String num = putPass.getText().toString();
+                if(num=="sambbhav")
+                {
+                    Intent starter = new Intent(getApplicationContext(),ThirdActivity.class);
+                    startActivity(starter);
+                }
+                else
+                {
+                    Toast.makeText(SecondActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            }
+        });
+
+
+
+
+
+
+
+
+    }
+}
+//act3
+package com.example.sambbhavgarg.myapplication;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class ThirdActivity extends AppCompatActivity {
+    TextView textView;
+    Button button;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main2);
+        textView=(TextView)findViewById(R.id.text2);
+        textView.setText("Hello, my name is Sambbhav Garg, i Study at the university of petroleum and energy studies. this is my first functioning android application. It was fun making this application, hope it was fun going through it too.");
+        button=(Button)findViewById(R.id.button2);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+}
